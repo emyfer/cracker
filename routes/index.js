@@ -4,14 +4,14 @@ const { Pool } = require('pg');
 require("dotenv").config();
 var router = express.Router();
 
-const con = new Client({
+/*const con = new Client({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     port: process.env.DB_PORT,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
 });
-con.connect().then(() => console.log("connected"));
+con.connect().then(() => console.log("connected"));*/
 
 
 const pool = new Pool({
