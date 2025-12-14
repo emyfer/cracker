@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stats</title>
+<link rel="stylesheet" href="/styles/stats.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<a href="/" class="home">Home</a>
+
+<div id="chartData" 
+     data-intensity='<%- JSON.stringify(intensity) %>' 
+     data-mood='<%- JSON.stringify(mood) %>' 
+     data-reason='<%- JSON.stringify(reason) %>'
+     data-total="<%= total %>">
+</div>
+
+<div class="container">
+    <h1>Stats</h1>
+    <p class="total">Ukupan broj unosa: <%= total %></p>
+
+    <div class="charts">
+
+        <div class="chart-card">
+            <h2>Intensity</h2>
+            <canvas id="intensityChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h2>Mood</h2>
+            <canvas id="moodChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h2>Reason</h2>
+            <canvas id="reasonChart"></canvas>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Proslijedi podatke iz EJS u JS
+
+const chartDiv = document.getElementById('chartData');
+
+const intensityData = JSON.parse(chartDiv.dataset.intensity);
+const moodData = JSON.parse(chartDiv.dataset.mood);
+const reasonData = JSON.parse(chartDiv.dataset.reason);
+const total = chartDiv.dataset.total;
+
+// Chart.js kod ostaje isti
+
+
+    // Intensity Bar Chart
+    const intensityCtx = document.getElementById('intensityChart').getContext('2d');
+    new Chart(intensityCtx, {
+        type: 'bar',
+        data: {
+            labels: intensityData.map(i => i.intensity),
+            datasets: [{
+                label: 'Number of entries',
+                data: intensityData.map(i => i.count),
+                backgroundColor: '#7086B4'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+
+    // Mood Doughnut Chart
+    const moodCtx = document.getElementById('moodChart').getContext('2d');
+    new Chart(moodCtx, {
+        type: 'doughnut',
+        data: {
+            labels: moodData.map(m => m.mood),
+            datasets: [{
+                label: 'Mood',
+                data: moodData.map(m => m.count),
+                backgroundColor: ['#FF6384','#36A2EB']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+
+    // Reason Pie Chart
+    const reasonCtx = document.getElementById('reasonChart').getContext('2d');
+    new Chart(reasonCtx, {
+        type: 'pie',
+        data: {
+            labels: reasonData.map(r => r.reason),
+            datasets: [{
+                label: 'Reason',
+                data: reasonData.map(r => r.count),
+                backgroundColor: ['#FF6384','#36A2EB','#FFCE56','#4BC0C0','#9966FF','#FF9F40']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

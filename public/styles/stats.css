@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E5E5E5;
+    color: #7086B4;
+    margin: 0;
+    padding: 20px;
+}
+
+.home {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #7086B4;
+    font-weight: bold;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.total {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.chart-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(131, 156, 193, 0.5);
+}
+
+.chart-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}

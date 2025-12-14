@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cry Form</title>
+<link rel="stylesheet" href="/styles/form.css">
+</head>
+<body data-show-success="<%= showSuccess ? 'true' : 'false' %>">
+
+<a href="/" class="home">Home</a>
+
+<form id="cryForm" action="/cry_form" method="post">
+
+    <!-- START SCREEN -->
+    <div class="question active" id="startScreen">
+        <h2>Zapocni zapis</h2>
+        <button type="button" id="startBtn">Start</button>
+    </div>
+
+    <!-- 1. Intensity -->
+    <div class="question" id="q1">
+        <h3>1. Intensity</h3>
+        <div class="options">
+            <button type="button" data-value="1">Very low</button>
+            <button type="button" data-value="2">Low</button>
+            <button type="button" data-value="3">Medium</button>
+            <button type="button" data-value="4">High</button>
+            <button type="button" data-value="5">Very High</button>
+        </div>
+        <input type="hidden" name="intensity" id="intensity">
+        <button type="button" class="nextBtn">Next</button>
+    </div>
+
+    <!-- 2. Mood -->
+    <div class="question" id="q2">
+        <h3>2. Mood</h3>
+        <div class="options">
+            <button type="button" data-value="happy">Happy</button>
+            <button type="button" data-value="sad">Sad</button>
+        </div>
+        <input type="hidden" name="mood" id="mood">
+        <button type="button" class="nextBtn">Next</button>
+    </div>
+
+    <!-- 3. Reason -->
+    <div class="question" id="q3">
+        <h3>3. Reason</h3>
+        <div class="options">
+            <button type="button" data-value="stress/overwhelmed">Stress/Overwhelmed</button>
+            <button type="button" data-value="uni">Uni</button>
+            <button type="button" data-value="love life">Love Life</button>
+            <button type="button" data-value="friends/family">Friends/Family</button>
+            <button type="button" data-value="loneliness">Loneliness</button>
+        </div>
+        <input type="hidden" name="reason" id="reason">
+        <button type="button" class="nextBtn">Next</button>
+    </div>
+
+    <!-- 4. Description -->
+    <div class="question" id="q4">
+        <h3>4. Description</h3>
+        <textarea name="description" rows="4" cols="50" placeholder="Write your thoughts..."></textarea>
+        <button type="submit">Submit</button>
+    </div>
+
+    <!-- SUCCESS MESSAGE -->
+    <div class="question" id="successScreen">
+        <h2>Jeej! Tvoj odgovor je zabilježen.</h2>
+        <a href="/" class="home">Home</a>
+    </div>
+
+</form>
+
+<script>
+let current = 0;
+const questions = document.querySelectorAll('.question');
+
+document.getElementById('startBtn').addEventListener('click', () => {
+    questions[current].classList.remove('active');
+    current++;
+    questions[current].classList.add('active');
+});
+
+document.querySelectorAll('.nextBtn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        questions[current].classList.remove('active');
+        current++;
+        questions[current].classList.add('active');
+    });
+});
+
+document.querySelectorAll('.options button').forEach(btn => {
+    btn.addEventListener('click', e => {
+        const parent = e.target.closest('.question');
+        const input = parent.querySelector('input[type=hidden]');
+        input.value = e.target.getAttribute('data-value');
+
+        parent.querySelectorAll('.options button').forEach(b => b.classList.remove('selected'));
+        e.target.classList.add('selected');
+    });
+});
+
+// Prikaz success ekrana ako showSuccess == true
+window.addEventListener('DOMContentLoaded', () => {
+    if (document.body.dataset.showSuccess === 'true') {
+        questions.forEach(q => q.classList.remove('active'));
+        document.getElementById('successScreen').classList.add('active');
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #E5E5E5; /* Platinum */
+    color: #7086B4; /* Glaucous */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+form { /* Wild Blue Yonder */
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    height: 400px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(131, 156, 193, 0.5);
+    position: relative;
+}
+
+h2, h3 {
+    text-align: center;
+}
+
+.question {
+    display: none;
+    margin-bottom: 20px;
+}
+
+.question.active {
+    display: block;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+button {
+    padding: 10px;
+    border: 2px solid #7086B4;
+    background: none;
+    color: #7086B4;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: #7086B4;
+    color: #E5E5E5;
+}
+
+button.selected {
+    background-color: #7086B4;
+    color: #E5E5E5;
+}
+
+.home {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    text-decoration: none;
+    color: #7086B4;
+    font-weight: bold;
+}
+
+#startBtn {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: 2px solid #7086B4;
+    border-radius: 8px;
+    background: none;
+    color: #7086B4;
+    cursor: pointer;
+    display: block;
+    margin: 40px auto 0 auto; /* centriranje */
+    transition: all 0.2s ease;
+}
+
+#startBtn:hover {
+    background-color: #7086B4;
+    color: #E5E5E5;
+}
+
+.nextBtn {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
