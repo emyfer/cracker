@@ -1,5 +1,6 @@
 const express = require("express");
-const { Client } = require('pg');
+//const { Client } = require('pg');
+const { Pool } = require('pg');
 require("dotenv").config();
 var router = express.Router();
 
@@ -12,22 +13,30 @@ const con = new Client({
 });
 con.connect().then(() => console.log("connected"));
 
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 5000, 
+  max: 20
+});
+
+pool.connect().then(() => console.log("connected to Neon"))
+  .catch(err => console.error('Connection error:', err));
+
+
 router.get("/", (req,res) => {
     res.render('landing');
 });
 
 router.get("/cry_form", (req, res) => {
-    // showSuccess default false
     res.render('cry_login', { showSuccess: false });
 });
 
 router.post("/cry_form", async (req, res) => {
     const { intensity, mood, reason, description } = req.body;
     console.log(intensity, mood, reason, description);
-
-
-
-    // Ako želiš kasnije spremati u bazu, koristi ovo bez slanja dva res:
     
     try {
         await con.query(
