@@ -39,7 +39,7 @@ router.post("/cry_form", async (req, res) => {
     console.log(intensity, mood, reason, description);
     
     try {
-        await con.query(
+        await pool.query(
             "INSERT INTO cries (cry_date, intensity, mood, reason, description) VALUES (CURRENT_DATE, $1, $2, $3, $4)",
             [intensity, mood, reason, description]
         );
@@ -53,10 +53,10 @@ router.post("/cry_form", async (req, res) => {
 
 router.get("/stats", async (req, res) => {
     try {
-        const totalRes = await con.query("SELECT COUNT(*) FROM cries");
-        const intensityRes = await con.query("SELECT intensity, COUNT(*) FROM cries GROUP BY intensity");
-        const moodRes = await con.query("SELECT mood, COUNT(*) FROM cries GROUP BY mood");
-        const reasonRes = await con.query("SELECT reason, COUNT(*) FROM cries GROUP BY reason");
+        const totalRes = await pool.query("SELECT COUNT(*) FROM cries");
+        const intensityRes = await pool.query("SELECT intensity, COUNT(*) FROM cries GROUP BY intensity");
+        const moodRes = await pool.query("SELECT mood, COUNT(*) FROM cries GROUP BY mood");
+        const reasonRes = await pool.query("SELECT reason, COUNT(*) FROM cries GROUP BY reason");
 
         res.render('stats', {
             total: totalRes.rows[0].count,
