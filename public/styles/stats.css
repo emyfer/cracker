@@ -31,6 +31,12 @@ body {
     gap: 30px;
 }
 
+@media (max-width: 768px) {
+  .charts {
+    grid-template-columns: 1fr;
+  }
+}
+
 .chart-card {
     background: #fff;
     padding: 20px;

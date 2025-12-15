@@ -12,13 +12,11 @@
 
 <form id="cryForm" action="/cry_form" method="post">
 
-    <!-- START SCREEN -->
     <div class="question active" id="startScreen">
         <h2>Zapocni zapis</h2>
         <button type="button" id="startBtn">Start</button>
     </div>
 
-    <!-- 1. Intensity -->
     <div class="question" id="q1">
         <h3>1. Intensity</h3>
         <div class="options">
@@ -32,7 +30,6 @@
         <button type="button" class="nextBtn">Next</button>
     </div>
 
-    <!-- 2. Mood -->
     <div class="question" id="q2">
         <h3>2. Mood</h3>
         <div class="options">
@@ -43,7 +40,6 @@
         <button type="button" class="nextBtn">Next</button>
     </div>
 
-    <!-- 3. Reason -->
     <div class="question" id="q3">
         <h3>3. Reason</h3>
         <div class="options">
@@ -52,22 +48,22 @@
             <button type="button" data-value="love life">Love Life</button>
             <button type="button" data-value="friends/family">Friends/Family</button>
             <button type="button" data-value="loneliness">Loneliness</button>
+            <button type="button" data-value="movies-books-music">Music/Books/Movies</button>
         </div>
         <input type="hidden" name="reason" id="reason">
         <button type="button" class="nextBtn">Next</button>
     </div>
 
-    <!-- 4. Description -->
     <div class="question" id="q4">
         <h3>4. Description</h3>
         <textarea name="description" rows="4" cols="50" placeholder="Write your thoughts..."></textarea>
         <button type="submit">Submit</button>
     </div>
 
-    <!-- SUCCESS MESSAGE -->
     <div class="question" id="successScreen">
-        <h2>Jeej! Tvoj odgovor je zabilježen.</h2>
-        <a href="/" class="home">Home</a>
+        <h2>Your answers are stored.</h2>
+        <h5>Remember, crying is completly okey. It's getting rid of stress.</h5>
+
     </div>
 
 </form>
@@ -101,7 +97,6 @@ document.querySelectorAll('.options button').forEach(btn => {
     });
 });
 
-// Prikaz success ekrana ako showSuccess == true
 window.addEventListener('DOMContentLoaded', () => {
     if (document.body.dataset.showSuccess === 'true') {
         questions.forEach(q => q.classList.remove('active'));
